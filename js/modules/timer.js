@@ -6,11 +6,8 @@ function getZero(num) {
     }
 }
 
-function timer() {
+function timer(id, deadLine) {
 //Timer
-
-const deadLine = '2021-03-11';
-
 function getTimeRemaining(endtime){
     const t = Date.parse(endtime) - Date.parse(new Date()),
        days = Math.floor(t / (1000 * 60 *60* 24)),
@@ -51,7 +48,7 @@ function setClock(selector, endtime) {
        }
 }
 
-setClock('.timer', deadLine);
+setClock(id, deadLine);
 }
 
 export default timer;
