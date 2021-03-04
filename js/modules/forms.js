@@ -68,7 +68,7 @@ function forms(){
         const previosModalDialod = document.querySelector('.modal__dialog');
 
         previosModalDialod.classList.add('hide');
-        openModal();
+        openModal('.modal');
 
         const thanksModal = document.createElement('div');
         thanksModal.classList.add('modal__dialog');

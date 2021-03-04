@@ -9,6 +9,8 @@ console.log(modalTimerId);
         clearInterval(modalTimerId);
     }
 }
+
+
 function closeModal(modalSelector) {
     const modal = document.querySelector(modalSelector);
     modal.classList.add('hide');
@@ -16,7 +18,6 @@ function closeModal(modalSelector) {
     document.body.style.overflow = '';
 }
 
-// document.querySelector('[data-close]').addEventListener('click', closeModal(modalSelector);
 
 function modal(triggerSelector, modalSelector, modalTimerId) {
     //Modal
@@ -44,7 +45,7 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
-
+document.querySelector('[data-close]').addEventListener('click', closeModal(modalSelector));
 
 function showModalByScroll() {
     if(window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight){
@@ -58,6 +59,6 @@ window.addEventListener('scroll', showModalByScroll);
 
 }
 
-export {modal};
+export default modal;
 export {closeModal};
 export {openModal};

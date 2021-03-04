@@ -12,7 +12,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-function calculator() {
+function calc() {
     //Calculator
 
     const result = document.querySelector('.calculating__result span');
@@ -132,7 +132,7 @@ getDynamicInformation("#weight");
 getDynamicInformation("#age");
 }
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (calculator);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (calc);
 
 /***/ }),
 
@@ -234,6 +234,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modal */ "./js/modules/modal.js");
 
 
+// openModal('.modal');
+// closeModal('.modal');
+
+
+
 function forms(){
     // POST Forms
 
@@ -297,7 +302,7 @@ function forms(){
         const previosModalDialod = document.querySelector('.modal__dialog');
 
         previosModalDialod.classList.add('hide');
-        (0,_modal__WEBPACK_IMPORTED_MODULE_0__.openModal)();
+        (0,_modal__WEBPACK_IMPORTED_MODULE_0__.openModal)('.modal');
 
         const thanksModal = document.createElement('div');
         thanksModal.classList.add('modal__dialog');
@@ -313,7 +318,7 @@ function forms(){
             thanksModal.remove();
             previosModalDialod.classList.add('show');
             previosModalDialod.classList.remove('hide');
-            (0,_modal__WEBPACK_IMPORTED_MODULE_0__.closeModal)();
+            (0,_modal__WEBPACK_IMPORTED_MODULE_0__.closeModal)('.modal');
         },4000);
     }
 
@@ -351,6 +356,8 @@ console.log(modalTimerId);
         clearInterval(modalTimerId);
     }
 }
+
+
 function closeModal(modalSelector) {
     const modal = document.querySelector(modalSelector);
     modal.classList.add('hide');
@@ -358,23 +365,24 @@ function closeModal(modalSelector) {
     document.body.style.overflow = '';
 }
 
-function modal(triggerSelector, modalSelector) {
+
+function modal(triggerSelector, modalSelector, modalTimerId) {
     //Modal
 
     const modal = document.querySelector(modalSelector),
     btns = document.querySelectorAll(triggerSelector);
-    // close = document.querySelector('[data-close]');
+    
 
 
 btns.forEach(btn => {
-    btn.addEventListener('click',() => openModal(modalSelector));
+    btn.addEventListener('click',() => openModal(modalSelector, modalTimerId));
 });
 
-// close.addEventListener('click', closeModal);
+
 
 modal.addEventListener('click', (event) => {
     if(event.target == modal || event.target.getAttribute('data-close')=='') {
-        closeModal();
+        closeModal(modalSelector);
     }
 });
 
@@ -384,11 +392,11 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
-const modalTimerId = setTimeout(openModal, 100000000);
+document.querySelector('[data-close]').addEventListener('click', closeModal(modalSelector));
 
 function showModalByScroll() {
     if(window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight){
-       openModal(modalSelector);
+       openModal(modalSelector,modalTimerId);
     
     window.removeEventListener('scroll', showModalByScroll);
     }
@@ -737,11 +745,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 window.addEventListener('DOMContentLoaded', () => {
+
+    const modalTimerId = setTimeout(() => (0,_modules_modal__WEBPACK_IMPORTED_MODULE_3__.openModal)('.modal', modalTimerId), 9000);
+
     (0,_modules_calc__WEBPACK_IMPORTED_MODULE_0__.default)();
     (0,_modules_cards__WEBPACK_IMPORTED_MODULE_1__.default)();
     (0,_modules_forms__WEBPACK_IMPORTED_MODULE_2__.default)();
-    (0,_modules_modal__WEBPACK_IMPORTED_MODULE_3__.default)('[data-modal]','.modal');
+    (0,_modules_modal__WEBPACK_IMPORTED_MODULE_3__.default)('[data-modal]',".modal", modalTimerId);
     (0,_modules_slider__WEBPACK_IMPORTED_MODULE_4__.default)();
     (0,_modules_tabs__WEBPACK_IMPORTED_MODULE_5__.default)();
     (0,_modules_timer__WEBPACK_IMPORTED_MODULE_6__.default)();
